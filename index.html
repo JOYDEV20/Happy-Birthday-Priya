@@ -1,0 +1,116 @@
+<html>
+
+<head>
+    <title>Happy Birthday</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="loader">
+                <button id="play">Start</button>
+            </div>
+        </div>
+    </div>
+    <audio class="song" controls loop>
+        <source src="music2.mp3">
+        </source>
+        Your browser isn't invited for super fun audio time.
+    </audio>
+    <audio id="music2" loop>
+        <source src="music2.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <canvas id="confetti"></canvas>
+    <div class="main">
+        <div class="container pt-5">
+            <div class="row">
+
+                <div class="col-12 col-xl-6 mx-auto">
+                    <img src="img/banner.png" alt="">
+                </div>
+
+                <div class="col-12  text-center">
+                    <div id="name" class="area">Priya</div>
+                </div>
+
+                <div class="col-12 text-center">
+                    <div class="type-wrap">
+                        <div id="typed-strings" class="typing">
+                            <h2>Happy Birthday <i id="nae">Priya</i></h2>
+                            <h2>Have a wonderful day</h2>
+                            <h2>Filled with joy and happiness.</h2>
+                        </div>
+                        <span id="typed" style="white-space:pre;"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-3 cake">
+                    <img src="img/cake.gif" alt="">
+                </div>
+                <div class="col-12 text-center mt-4">
+                    <button id="fireBtn" onclick="fireBtn()" class="btn btn-danger btn-lg">🔥 Fire Candle</button>
+                </div>
+            </div>
+        </div>
+        <img src="img/Balloon-Border.png" width="100%" class="balloon-border">
+    </div>
+</body>
+<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/typed.min.js"></script>
+<script src="js/script.js"></script>
+<script>
+    document.getElementById("play").addEventListener("click", () => {
+        let bgMusic = document.getElementById("music1");
+        let mainMusic = document.getElementById("music2");
+
+        // Background music lower volume
+        bgMusic.volume = 0.3;   // 30% volume
+        bgMusic.play();
+
+        // Main music louder
+        mainMusic.volume = 1.0; // 100% volume
+        mainMusic.play();
+    });
+    // Replace with the IP address of your ESP32
+    const ESP32_IP = "10.64.7.204";
+
+    function fireBtn() {
+        fetch(`http://${ESP32_IP}/led_on`)
+            .then(response => {
+                if (response.ok) {
+                    alert('LED turned ON!');
+                } else {
+                    alert('Failed to turn on LED.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Check if ESP32 is on the network.');
+            });
+    }
+
+    function turnOffLed() {
+        fetch(`http://${ESP32_IP}/led_off`)
+            .then(response => {
+                if (response.ok) {
+                    alert('LED turned OFF!');
+                } else {
+                    alert('Failed to turn off LED.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Check if ESP32 is on the network.');
+            });
+    }
+
+</script>
+
+</html>
