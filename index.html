@@ -1,116 +1,282 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Happy Birthday</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Birthday Special</title>
+   <!-- Bootstrap CDN -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+      body {
+         background: #fffafc;
+         font-family: 'Segoe UI', sans-serif;
+      }
+
+      /* Top Birthday Card */
+      .birthday-card {
+         background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+         color: #fff;
+         border-radius: 15px;
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+         overflow: hidden;
+      }
+
+      .birthday-card img {
+         width: 100%;
+         height: 250px;
+         object-fit: cover;
+      }
+
+      .birthday-card .card-body {
+         text-align: center;
+         padding: 20px;
+      }
+
+      .birthday-card h2 {
+         font-weight: bold;
+      }
+
+      /* Carousel */
+      .carousel-item img {
+         height: 70vh;
+         object-fit: cover;
+      }
+
+      /* Flip card */
+      .flip-card {
+         background-color: transparent;
+         width: 100%;
+         height: 250px;
+         perspective: 1000px;
+         cursor: pointer;
+      }
+
+      .flip-card-inner {
+         position: relative;
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         transition: transform 0.6s;
+         transform-style: preserve-3d;
+      }
+
+      .flip-card.flipped .flip-card-inner {
+         transform: rotateY(180deg);
+      }
+
+      .flip-card-front,
+      .flip-card-back {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         backface-visibility: hidden;
+         border-radius: 10px;
+         overflow: hidden;
+      }
+
+      .flip-card-front img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+
+      .flip-card-back {
+         background: #ffccd5;
+         color: #900c3f;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 15px;
+         transform: rotateY(180deg);
+         font-size: 1.2rem;
+         font-weight: bold;
+      }
+   </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="loader">
-                <button id="play">Start</button>
+   <audio id="birthday-audio" src="music2.mp3" autoplay loop></audio>
+   <!-- 🎉 Top Birthday Card -->
+   <div class="container my-5">
+      <div class="birthday-card">
+         <video src="21.mp4" autoplay muted loop style="width:100%; border-radius:15px 15px 0 0;"></video>
+         <div class="card-body">
+            <h2>🎂 Happy Birthday, Priya! 🎉</h2>
+            <p class="mb-0">May your day be filled with love, laughter, and endless joy. You are truly special! 💖</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- 🎠 Carousel -->
+   <div id="birthdayCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+            <img src="car1.jpeg" class="d-block w-100" alt="Cake">
+         </div>
+         <div class="carousel-item">
+            <img src="car2.jpeg" class="d-block w-100" alt="Balloons">
+         </div>
+         <div class="carousel-item">
+            <img src="car3.jpg" class="d-block w-100" alt="Gift">
+         </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev">
+         <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next">
+         <span class="carousel-control-next-icon"></span>
+      </button>
+   </div>
+
+   <!-- 🎂 Image Grid with Flip Cards -->
+   <div class="container py-5">
+      <div class="row g-4">
+
+         <!-- Example 1 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="1.jpg" alt="Cake">
+                  </div>
+                  <div class="flip-card-back">
+                     🎂তুমি পাশে থাকলে নীরবতাও কবিতা হয়ে যায়।
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-    <audio class="song" controls loop>
-        <source src="music2.mp3">
-        </source>
-        Your browser isn't invited for super fun audio time.
-    </audio>
-    <audio id="music2" loop>
-        <source src="music2.mp3" type="audio/mpeg">
-    </audio>
+         </div>
 
-
-    <canvas id="confetti"></canvas>
-    <div class="main">
-        <div class="container pt-5">
-            <div class="row">
-
-                <div class="col-12 col-xl-6 mx-auto">
-                    <img src="img/banner.png" alt="">
-                </div>
-
-                <div class="col-12  text-center">
-                    <div id="name" class="area">Priya</div>
-                </div>
-
-                <div class="col-12 text-center">
-                    <div class="type-wrap">
-                        <div id="typed-strings" class="typing">
-                            <h2>Happy Birthday <i id="nae">Priya</i></h2>
-                            <h2>Have a wonderful day</h2>
-                            <h2>Filled with joy and happiness.</h2>
-                        </div>
-                        <span id="typed" style="white-space:pre;"></span>
-                    </div>
-                </div>
-
-                <div class="col-12 col-xl-3 cake">
-                    <img src="img/cake.gif" alt="">
-                </div>
-                <div class="col-12 text-center mt-4">
-                    <button id="fireBtn" onclick="fireBtn()" class="btn btn-danger btn-lg">🔥 Fire Candle</button>
-                </div>
+         <!-- Example 2 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="2.jpg" alt="Balloons">
+                  </div>
+                  <div class="flip-card-back">
+                     🎈 এক ফ্রেমে বাঁধা দু'টি মন, ভালোবাসার গল্প হোক অমলিন।
+                  </div>
+               </div>
             </div>
-        </div>
-        <img src="img/Balloon-Border.png" width="100%" class="balloon-border">
-    </div>
+         </div>
+
+         <!-- Example 3 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="3.jpg" alt="Gift">
+                  </div>
+                  <div class="flip-card-back">
+                     🎁 কর্মব্যস্ত দিনের মাঝেও, হৃদয়ের গভীর কোণে বন্ধুত্বের চেয়েও বেশি কিছু, যা শুধু অনুভবেই বাঁচে।
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Example 4 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="4.jpg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 শান্ত এক কোণে, নিজের সাথে কাটানো মুহূর্ত, যেখানে সব কোলাহল ম্লান।
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Example 5 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="5.jpg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 ধোঁয়াশার আড়ালে লুকোনো হাজারো ভাবনা, যা শুধু চোখের গভীরেই খুঁজে পাওয়া যায়।
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Example 6 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="6.jpeg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 আজকের দিনে তুমি যেন এক রূপকথার রাজকন্যা, আর তোমার হাসিই এই গল্পের সেরা উপহার।
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Example 7 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="7.jpeg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 এই দিনটা শুধু তোমার জন্য, আর আমি প্রতি পদক্ষেপে তোমার পাশে আছি, সব স্বপ্ন পূরণের জন্য।
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Example 8 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="8.jpeg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 গোলাপী শাড়ীতে তোমার ওই স্নিগ্ধ রূপ আর হাতে আঁকা ভালোবাসার আল্পনা, আমার হৃদয়ে আজীবন থাকবে।
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Example 9 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="9.jpeg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 কথা না বলেও তুমি আমার সব কথা বোঝো, তোমার নীরবতাই আমার কাছে সবচেয়ে প্রিয় কবিতা।
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!-- Example 10 -->
+         <div class="col-6 col-md-6 col-lg-3">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                     <img src="10.jpeg" alt="Party">
+                  </div>
+                  <div class="flip-card-back">
+                     🥳 তোমার এই আলিঙ্গনটাই আমার সবচেয়ে প্রিয় জায়গা,যেখানে আমার সবটুকু শান্তি,আর ভালোবাসার সবটুকু ভরসা।
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- You can duplicate these flip cards until 32 -->
+
+      </div>
+   </div>
+
+   <!-- Bootstrap JS -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/typed.min.js"></script>
-<script src="js/script.js"></script>
-<script>
-    document.getElementById("play").addEventListener("click", () => {
-        let bgMusic = document.getElementById("music1");
-        let mainMusic = document.getElementById("music2");
-
-        // Background music lower volume
-        bgMusic.volume = 0.3;   // 30% volume
-        bgMusic.play();
-
-        // Main music louder
-        mainMusic.volume = 1.0; // 100% volume
-        mainMusic.play();
-    });
-    // Replace with the IP address of your ESP32
-    const ESP32_IP = "10.64.7.204";
-
-    function fireBtn() {
-        fetch(`http://${ESP32_IP}/led_on`)
-            .then(response => {
-                if (response.ok) {
-                    alert('LED turned ON!');
-                } else {
-                    alert('Failed to turn on LED.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Check if ESP32 is on the network.');
-            });
-    }
-
-    function turnOffLed() {
-        fetch(`http://${ESP32_IP}/led_off`)
-            .then(response => {
-                if (response.ok) {
-                    alert('LED turned OFF!');
-                } else {
-                    alert('Failed to turn off LED.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Check if ESP32 is on the network.');
-            });
-    }
-
-</script>
 
 </html>
